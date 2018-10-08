@@ -1,0 +1,6 @@
+{
+  "kty": "oct",
+  "alg": "A256GCM",
+  "use": "enc",
+  "k": "123456789abcdefghijklmnopqrstuvwxyz12345678"
+}
