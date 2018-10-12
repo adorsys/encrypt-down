@@ -1,14 +1,14 @@
 # :closed_lock_with_key: encrypt-down :closed_lock_with_key:
 
 [![leveldb](http://leveldb.org/img/badge.svg)](https://github.com/level/awesome)
-[![Travis](https://img.shields.io/travis/radzom/encrypt-down.svg)](https://travis-ci.org/radzom/encrypt-down)
-[![Coveralls](https://img.shields.io/coveralls/radzom/encrypt-down.svg)](https://coveralls.io/github/radzom/encrypt-down)
+[![Travis](https://img.shields.io/travis/adorsys/encrypt-down.svg)](https://travis-ci.org/adorsys/encrypt-down)
+[![Coveralls](https://img.shields.io/coveralls/adorsys/encrypt-down.svg)](https://coveralls.io/github/adorsys/encrypt-down)
 [![npm](https://img.shields.io/npm/v/@adorsys/encrypt-down.svg)](https://www.npmjs.com/package/@adorsys/encrypt-down)
 [![npm](https://img.shields.io/npm/dt/@adorsys/encrypt-down.svg)](https://www.npmjs.com/package/@adorsys/encrypt-down)
 [![Conventional Commits](https://img.shields.io/badge/Conventional_Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier#readme)
-[![NpmLicense](https://img.shields.io/npm/l/encrypt-down.svg)](https://github.com/radzom/encrypt-down/blob/master/LICENSE)
+[![NpmLicense](https://img.shields.io/npm/l/encrypt-down.svg)](https://github.com/adorsys/encrypt-down/blob/master/LICENSE)
 
 An abstract-leveldown implementation that wraps another store to encrypt values.
 
