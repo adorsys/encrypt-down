@@ -1,5 +1,5 @@
-function promisedIdentity (value) {
-  Promise.resolve(value)
+async function promisedIdentity (value) {
+  return value
 }
 
 const codec = {
