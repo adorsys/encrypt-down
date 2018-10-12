@@ -1,6 +1,6 @@
 # :closed_lock_with_key: encrypt-down :closed_lock_with_key:
 
-[![level badge](https://leveldb.org/img/badge.svg)](https://github.com/level/awesome)
+[![leveldb](http://leveldb.org/img/badge.svg)](https://github.com/level/awesome)
 [![Travis](https://img.shields.io/travis/radzom/encrypt-down.svg)](https://travis-ci.org/radzom/encrypt-down)
 [![Coveralls](https://img.shields.io/coveralls/radzom/encrypt-down.svg)](https://coveralls.io/github/radzom/encrypt-down)
 [![npm](https://img.shields.io/npm/v/@adorsys/encrypt-down.svg)](https://www.npmjs.com/package/@adorsys/encrypt-down)
