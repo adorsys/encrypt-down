@@ -31,8 +31,9 @@
     "lint": "standard --verbose | snazzy",
     "format": "prettier-standard '**/*.js'",
     "test": "ava",
-    "test:integ": "tape test/**/*.tape.js | tap-spec",
-    "test:all": "npm run test && npm run test:integ",
+    "test:integ-browser": "airtap --local test/integrations/leveljs.test.js",
+    "test:integ-node": "tape test/integrations/leveldown.test.js test/integrations/memdown.test.js | tap-spec",
+    "test:all": "npm run test && npm run test:integ-node",
     "test:cover": "nyc --reporter=lcov ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "travis-deploy-once": "travis-deploy-once",
@@ -52,7 +53,7 @@
   },
   "ava": {
     "files": [
-      "test/**/*.test.js"
+      "test/*.test.js"
     ],
     "verbose": true
   },
@@ -64,11 +65,13 @@
     "@adorsys/jwe-codec": "1.0.0",
     "@commitlint/cli": "7.1.2",
     "@commitlint/config-conventional": "7.1.2",
+    "airtap": "0.1.0",
     "ava": "1.0.0-beta.8",
     "coveralls": "3.0.2",
     "eslint-plugin-html": "4.0.5",
     "eslint-plugin-markdown": "1.0.0-beta.6",
     "husky": "1.0.0-rc.15",
+    "level-js": "3.0.0",
     "leveldown": "4.0.1",
     "lint-staged": "7.3.0",
     "memdown": "3.0.0",

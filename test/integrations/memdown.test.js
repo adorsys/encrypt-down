@@ -1,17 +1,22 @@
 const test = require('tape')
 const testCommon = require('abstract-leveldown/testCommon')
-const leveldown = require('leveldown')
-const EncryptDown = require('../src')
+const memdown = require('memdown')
+const EncryptDown = require('../../src')
 const jwe = require('@adorsys/jwe-codec')
-const key = require('./key.json')
+const key = require('../key.json')
 ;(async () => {
   const codec = await jwe(key)
-  const factory = location => new EncryptDown(leveldown(location), { codec })
+  const factory = location => new EncryptDown(memdown(), { codec })
 
   /** compatibility with basic LevelDOWN API **/
-  test('integration with leveldown', t => {
-    require('abstract-leveldown/abstract/leveldown-test').args(factory, test)
-    require('abstract-leveldown/abstract/open-test').all(
+  test('integration with memdown', t => {
+    // require('abstract-leveldown/abstract/leveldown-test').args(factory, test)
+    require('abstract-leveldown/abstract/open-test').args(
+      factory,
+      t.test,
+      testCommon
+    )
+    require('abstract-leveldown/abstract/open-test').open(
       factory,
       t.test,
       testCommon
