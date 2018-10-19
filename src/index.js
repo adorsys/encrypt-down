@@ -2,8 +2,9 @@
 
 const AbstractLevelDOWN = require('abstract-leveldown').AbstractLevelDOWN
 const AbstractIterator = require('abstract-leveldown').AbstractIterator
+const jose = require('node-jose')
+const jwe = require('@adorsys/jwe-codec')
 const inherits = require('inherits')
-const IdentityCodec = require('./identity-codec')
 
 module.exports = DB.default = DB
 
@@ -14,12 +15,12 @@ function DB (db, options) {
   AbstractLevelDOWN.call(this, '')
 
   options = options || {}
-  if (typeof options.codec === 'undefined') {
-    options.codec = IdentityCodec
+  if (typeof options.jwk === 'undefined') {
+    throw new Error('EncryptDown: a JsonWebKey is required!')
   }
-
+  const jwks = [].concat(options.jwk)
+  this.keystorePromise = jose.JWK.asKeyStore(jwks)
   this.db = db
-  this.codec = options.codec
 }
 
 inherits(DB, AbstractLevelDOWN)
@@ -33,7 +34,18 @@ DB.prototype._serializeValue = function (value) {
 }
 
 DB.prototype._open = function (options, callback) {
-  this.db.open(options, callback)
+  this.keystorePromise
+    .then(ks => {
+      const key = ks.get({ use: 'enc' })
+      return jwe(key.toJSON(true))
+    })
+    .then(codec => {
+      this.codec = codec
+      return this.db.open(options, callback)
+    })
+    .catch(error => {
+      return callback(error)
+    })
 }
 
 DB.prototype._close = function (callback) {
@@ -41,22 +53,20 @@ DB.prototype._close = function (callback) {
 }
 
 DB.prototype._put = function (key, value, options, callback) {
-  const self = this
   return this.codec
     .encrypt(value)
-    .then(function (cipher) {
-      self.db.put(key, cipher, options, callback)
+    .then(cipher => {
+      this.db.put(key, cipher, options, callback)
     })
     .catch(callback)
 }
 
 DB.prototype._get = function (key, options, callback) {
-  const self = this
-  self.db.get(key, { ...options, asBuffer: false }, function (err, cipher) {
+  this.db.get(key, { ...options, asBuffer: false }, (err, cipher) => {
     if (err) {
       return callback(err)
     }
-    self.codec
+    this.codec
       .decrypt(cipher)
       .then(function (value) {
         const checkedValue = emptyStringWhenNull(value)
@@ -74,18 +84,17 @@ DB.prototype._del = function (key, options, callback) {
 }
 
 DB.prototype._batch = function (ops, options, callback) {
-  const self = this
   Promise.all(
     ops.map(op => {
       switch (op.type) {
         case 'put':
-          return encryptOperationValue(self.codec, op)
+          return encryptOperationValue(this.codec, op)
         default:
           return Promise.resolve(op)
       }
     })
-  ).then(function (operations) {
-    self.db._batch(operations, options, callback)
+  ).then(operations => {
+    this.db._batch(operations, options, callback)
   })
 }
 
@@ -105,21 +114,20 @@ function Iterator (db, options) {
 inherits(Iterator, AbstractIterator)
 
 Iterator.prototype._next = function (callback) {
-  const self = this
-  self.it.next(function (err, key, cipher) {
+  this.it.next((err, key, cipher) => {
     if (err) {
       return callback(err)
     }
     if (key === undefined && cipher === undefined) {
       return callback()
     }
-    self.codec
+    this.codec
       .decrypt(cipher)
-      .then(function (value) {
+      .then(value => {
         callback(
           null,
           key,
-          self.options.valueAsBuffer ? Buffer.from(String(value)) : value
+          this.options.valueAsBuffer ? Buffer.from(String(value)) : value
         )
       })
       .catch(callback)

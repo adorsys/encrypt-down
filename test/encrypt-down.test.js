@@ -2,14 +2,12 @@ const test = require('ava')
 const memdown = require('memdown')
 const testCommon = require('abstract-leveldown/testCommon')
 const ltgt = require('ltgt')
-const jwe = require('@adorsys/jwe-codec')
 const EncryptDown = require('../src')
 const { stringBuffer, getKey, putKey, promisify } = require('./helper')
-const key = require('./key.json')
+const jwk = require('./jwk.json')
 
 test.beforeEach(async t => {
-  const codec = await jwe(key)
-  const db = new EncryptDown(memdown(), { codec })
+  const db = new EncryptDown(memdown(), { jwk })
   const promised = promisify(db)
   t.context.db = db
   t.context.promisedDB = {

@@ -10,7 +10,12 @@
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier#readme)
 [![NpmLicense](https://img.shields.io/npm/l/encrypt-down.svg)](https://github.com/adorsys/encrypt-down/blob/master/LICENSE)
 
-An abstract-leveldown implementation that wraps another store to encrypt values.
+encrypt-down is an encryption layer for LevelDB. 
+
+For LevelDB exist several persistence bindings. 
+Amongst others bindings for [IndexedDB](https://developer.mozilla.org/de/docs/IndexedDB).
+
+So lots (several MB) of sensitive user data can be stored securely (encrypted) in the browser across user sessions.
 
 ### Installation
 
@@ -20,62 +25,30 @@ npm install @adorsys/encrypt-down
 
 ### Usage
 
-Without any options `encrypt-down` can be used but nothing is encrypted.
+We need a JSON Web Key (JWK) or JSON Web Key Set (JWKS) as specified by [RFC 7517](https://tools.ietf.org/html/rfc7517).
+
 ```js
 const memdown = require('memdown')
-const encryptdown = require('@adorsys/encrypt-down')
-const levleup = require('levelup')
-
-const db = levelup(encryptdown(memdown()))
-
-db.put('key', { awesome: true }, function (err) {
-  db.get('key', function (err, value) {
-    console.log(value) // { awesome: true }
-  })
-})
-```
-
-Can we specify the encryption that shall be used? Yes!
-```js
-const memdown = require('memdown')
-const encryptdown = require('@adorsys/encrypt-down')
-const levleup = require('levelup')
-
-// WARNING: do not use this codec in production it is NOT ENCRYPTING
-const codec = {
-  encrypt: value => Promise.resolve(value),
-  decrypt: value => Promise.resolve(value)
-}
-const db = levelup(encryptdown(memdown(), { codec }))
-
-db.put('key', { awesome: true }, function (err) {
-  db.get('key', function (err, value) {
-    console.log(value) // { awesome: true }
-  })
-})
-```
-
-Is there an example that actually encrypts the values? Yes!
-We can use an existing encryption library like [`jwe-codec`](https://github.com/adorsys/jwe-codec).
-```js
-const memdown = require('memdown')
-const encryptdown = require('@adorsys/encrypt-down')
-const levleup = require('levelup')
-const jwe = require('@adorsys/jwe-codec')
-const key = {
+const encryptdown = require('./src')
+const levelup = require('levelup')
+const jwk = {
   kty: 'oct',
   alg: 'A256GCM',
   use: 'enc',
   k: '123456789abcdefghijklmnopqrstuvwxyz12345678'
 }
+const memdb = memdown()
+const db = levelup(encryptdown(memdb, { jwk }))
 
-jwe(key).then(function(codec) {
-  const db = levelup(encryptdown(memdown(), { codec }))
-
-  db.put('key', { awesome: true }, function (err) {
-    db.get('key', function (err, value) {
-      console.log(value) // { awesome: true }
-    })
+db.put('key', { awesome: true }, function (err) {
+  memdb._get('key', { asBuffer: false }, function (err, value) {
+        value
+        console.log(value)
+        // eyJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIiwia2lkIjoialpESEVqN0ZhR3N5OHNUSUZLRWlnejB4TjFEVWlBZWp0S1ZNcEl2Z3dqOCJ9..LLeRPtRCpn-Zie6-.zZc0LQ_vvHCppRAaC5fxw4yJ0041l6mGOSgLDVnaPagSv_3Khp8a8lyAo9utHQKpVX6RNVaVPBQQxJpkw_Zyljeg7L-O_Nc3N2Hi_904qE6_zwORqQRc.R0JhfgTHIcD_93kXzZ8BrA
+  })
+  db.get('key', { asBuffer: false }, function (err, value) {
+    console.log(value) 
+    // { awesome: true }
   })
 })
 ```
@@ -86,11 +59,7 @@ jwe(key).then(function(codec) {
 
 -   `db` must be an [`abstract-leveldown`](https://github.com/level/abstract-leveldown) compliant store
 -   `options`:
-    -   `codec`:
-        -   `encrypt`: function returning promise of encrypted value 
-        -   `decrypt`: function returning promise of decrypted value
-
-`encrypt` and `decrypt` both default to identity function when not explicitly specified.
+    -   `jwk`: a JSON Web Key (JWK) or JSON Web Key Set (JWKS) as specified by [RFC 7517](https://tools.ietf.org/html/rfc7517)
 
 ## Credits
 
@@ -98,7 +67,7 @@ Made with :heart: by [radzom](https://github.com/radzom) and all these wonderful
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| <img src="https://avatars.githubusercontent.com/u/3055345?v=3" width="100px;"/><br /><sub><b>Vincent Weevers</b></sub><br />:speech_balloon: | | | | | | |
+| <img src="https://avatars.githubusercontent.com/u/3055345?v=3" width="100px;"/><br /><sub><b>Vincent Weevers</b></sub><br />:speech_balloon: | <img src="https://avatars.githubusercontent.com/u/1225651?v=3" width="100px;"/><br /><sub><b>Francis Pouatcha</b></sub><br />🤔 | | | | | |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

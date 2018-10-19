@@ -61,11 +61,12 @@
     "verbose": true
   },
   "dependencies": {
+    "@adorsys/jwe-codec": "1.0.0",
     "abstract-leveldown": "5.0.0",
-    "inherits": "2.0.3"
+    "inherits": "2.0.3",
+    "node-jose": "1.0.0"
   },
   "devDependencies": {
-    "@adorsys/jwe-codec": "1.0.0",
     "@commitlint/cli": "7.1.2",
     "@commitlint/config-conventional": "7.1.2",
     "airtap": "0.1.0",
