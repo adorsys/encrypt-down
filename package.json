@@ -3,7 +3,9 @@
   "version": "0.0.0-development",
   "description": "Encryption layer for level-db",
   "main": "src/index.js",
-  "browser": "dist/lib.js",
+  "browser": {
+    "src/index.js": "dist/lib.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/adorsys/encrypt-down"
