@@ -12,7 +12,7 @@ function DB (db, options) {
   if (!(this instanceof DB)) {
     return new DB(db, options)
   }
-  AbstractLevelDOWN.call(this, '')
+  AbstractLevelDOWN.call(this)
 
   options = options || {}
   if (typeof options.jwk === 'undefined') {

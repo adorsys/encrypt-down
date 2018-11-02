@@ -61,7 +61,7 @@
   },
   "dependencies": {
     "@adorsys/jwe-codec": "1.0.0",
-    "abstract-leveldown": "5.0.0",
+    "abstract-leveldown": "6.0.0",
     "inherits": "2.0.3",
     "node-jose": "1.0.0"
   },
@@ -72,9 +72,11 @@
     "ava": "1.0.0-beta.8",
     "browserify": "16.2.3",
     "coveralls": "3.0.2",
+    "cuid": "2.1.4",
     "eslint-plugin-html": "4.0.5",
     "eslint-plugin-markdown": "1.0.0-beta.6",
     "husky": "1.0.0-rc.15",
+    "level-concat-iterator": "2.0.0",
     "level-js": "3.0.0",
     "leveldown": "4.0.1",
     "lint-staged": "7.3.0",
@@ -86,6 +88,7 @@
     "standard": "12.0.1",
     "tap-spec": "5.0.0",
     "tape": "4.9.1",
+    "tempy": "0.2.1",
     "travis-deploy-once": "^5.0.9"
   }
 }

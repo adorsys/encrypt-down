@@ -1,28 +1,14 @@
 const test = require('tape')
-const testCommon = require('abstract-leveldown/testCommon')
+const tempy = require('tempy')
+const suite = require('abstract-leveldown/test')
 const leveldown = require('leveldown')
-const EncryptDown = require('../../src')
 const jwk = require('../jwk.json')
-const factory = location => new EncryptDown(leveldown(location), { jwk })
+const EncryptDown = require('../../src')
 
-/** compatibility with basic LevelDOWN API **/
-test('integration with leveldown', t => {
-  require('abstract-leveldown/abstract/leveldown-test').args(factory, test)
-  require('abstract-leveldown/abstract/open-test').all(
-    factory,
-    t.test,
-    testCommon
-  )
-  require('abstract-leveldown/abstract/del-test').all(factory, t.test)
-  require('abstract-leveldown/abstract/get-test').all(factory, t.test)
-  require('abstract-leveldown/abstract/put-test').all(factory, t.test)
-  require('abstract-leveldown/abstract/put-get-del-test').all(factory, t.test)
-  require('abstract-leveldown/abstract/batch-test').all(factory, t.test)
-  require('abstract-leveldown/abstract/chained-batch-test').all(factory, t.test)
-  require('abstract-leveldown/abstract/close-test').close(factory, t.test)
-  require('abstract-leveldown/abstract/iterator-test').all(factory, t.test)
-  require('abstract-leveldown/abstract/iterator-range-test').all(
-    factory,
-    t.test
-  )
+suite({
+  test: test,
+  factory: function () {
+    return new EncryptDown(leveldown(tempy.directory()), { jwk })
+  },
+  seek: false
 })

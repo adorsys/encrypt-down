@@ -1,13 +1,13 @@
 const test = require('ava')
 const memdown = require('memdown')
-const testCommon = require('abstract-leveldown/testCommon')
+const concat = require('level-concat-iterator')
 const ltgt = require('ltgt')
 const EncryptDown = require('../src')
 const { stringBuffer, getKey, putKey, promisify } = require('./helper')
 const jwk = require('./jwk.json')
 
 test.beforeEach(async t => {
-  const db = new EncryptDown(memdown(), { jwk })
+  const db = EncryptDown(memdown(), { jwk })
   const promised = promisify(db)
   t.context.db = db
   t.context.promisedDB = {
@@ -28,17 +28,14 @@ test.afterEach.cb(t => {
   })
 })
 
-test.cb('null value', t => {
+test.cb('not specifying a jwk raises an error', t => {
   ;(async () => {
-    const promisedDB = t.context.promisedDB
-    await promisedDB.open()
-    await promisedDB.put('foo', null)
-    const value1 = await promisedDB.get('foo')
-    t.is(value1.toString(), '', 'nulls are equal')
-    const value2 = await promisedDB.get('foo', { asBuffer: false })
-    t.is(value2, '', 'nulls are equal')
+    t.throws(
+      () => EncryptDown(memdown(), {}),
+      'EncryptDown: a JsonWebKey is required!',
+      'correct Error is thrown'
+    )
     t.end()
-    t.pass('ok')
   })()
 })
 
@@ -57,7 +54,7 @@ test.cb('unsorted entry, sorted iterator', t => {
       { type: 'del', key: 'b' },
       { type: 'del', key: 'e' }
     ])
-    testCommon.collectEntries(
+    concat(
       promisedDB.db.iterator({ keyAsBuffer: false, valueAsBuffer: false }),
       function (err, data) {
         t.falsy(err, 'no error')
@@ -215,7 +212,7 @@ test.cb('iterator does not clone key buffers', t => {
     await promisedDB.open()
     await promisedDB.put(buf, 42)
 
-    testCommon.collectEntries(promisedDB.db.iterator(), function (err, entries) {
+    concat(promisedDB.db.iterator(), function (err, entries) {
       t.falsy(err, 'no iterator error')
       t.true(entries[0].key === buf, 'key is same buffer')
       t.end()
@@ -229,7 +226,7 @@ test.cb('iterator stringifies buffer input', t => {
     await promisedDB.open()
     await promisedDB.put(1, 2)
 
-    testCommon.collectEntries(promisedDB.db.iterator(), function (err, entries) {
+    concat(promisedDB.db.iterator(), function (err, entries) {
       t.falsy(err, 'no iterator error')
       t.deepEqual(entries[0].key, Buffer.from('1'), 'key is stringified')
       t.deepEqual(entries[0].value, Buffer.from('2'), 'value is stringified')
@@ -355,11 +352,11 @@ test.cb('number keys', t => {
     const iterator1 = promisedDB.db.iterator({ keyAsBuffer: false })
     const iterator2 = promisedDB.db.iterator({ keyAsBuffer: true })
 
-    testCommon.collectEntries(iterator1, function (err, entries) {
+    concat(iterator1, function (err, entries) {
       t.falsy(err, 'no iterator error')
       t.deepEqual(entries.map(getKey), numbers, 'sorts naturally')
 
-      testCommon.collectEntries(iterator2, function (err, entries) {
+      concat(iterator2, function (err, entries) {
         t.falsy(err, 'no iterator error')
         t.deepEqual(entries.map(getKey), buffers, 'buffer input is stringified')
         t.end()
@@ -380,11 +377,11 @@ test.cb('date keys', t => {
     const iterator = promisedDB.db.iterator({ keyAsBuffer: false })
     const iterator2 = promisedDB.db.iterator({ keyAsBuffer: true })
 
-    testCommon.collectEntries(iterator, function (err, entries) {
+    concat(iterator, function (err, entries) {
       t.falsy(err, 'no iterator error')
       t.deepEqual(entries.map(getKey), dates, 'sorts naturally')
 
-      testCommon.collectEntries(iterator2, function (err, entries) {
+      concat(iterator2, function (err, entries) {
         t.falsy(err, 'no iterator error')
         t.deepEqual(entries.map(getKey), buffers, 'buffer input is stringified')
         t.end()
