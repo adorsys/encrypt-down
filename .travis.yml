@@ -8,7 +8,7 @@ notifications:
   email: false
 script:
   - npm run build
-  - npm run test:cover
+  - npm run test
   - npm run test:integ
 after_success:
   - npm run coverage

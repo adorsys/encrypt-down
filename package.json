@@ -33,10 +33,9 @@
   "scripts": {
     "lint": "standard --verbose | snazzy",
     "format": "prettier-standard '**/*.js'",
-    "test": "ava",
+    "test": "nyc --reporter=lcov --reporter=text ava",
     "test:integ-browser": "airtap --local test/integrations/leveljs.test.js",
     "test:integ": "tape test/integrations/leveldown.test.js test/integrations/memdown.test.js | tap-spec",
-    "test:cover": "nyc --reporter=lcov ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "build": "browserify -s encryptdown -e src/index.js -o dist/lib.js",
     "travis-deploy-once": "travis-deploy-once",
