@@ -8,14 +8,14 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional_Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier#readme)
-[![NpmLicense](https://img.shields.io/npm/l/encrypt-down.svg)](https://github.com/adorsys/encrypt-down/blob/master/LICENSE)
+[![NpmLicense](https://img.shields.io/npm/l/@adorsys/encrypt-down.svg)](https://github.com/adorsys/encrypt-down/blob/master/LICENSE)
 
 encrypt-down is an encryption layer for LevelDB. 
 
 For LevelDB exist several persistence bindings. 
 Amongst others bindings for [IndexedDB](https://developer.mozilla.org/de/docs/IndexedDB).
 
-So lots (several MB) of sensitive user data can be stored securely (encrypted) in the browser across user sessions.
+By using encrypt-down it is possible to store lots (several MB) of sensitive user data securely (encrypted) in the browser across user sessions.
 
 ### Installation
 
@@ -42,7 +42,6 @@ const db = levelup(encryptdown(memdb, { jwk }))
 
 db.put('key', { awesome: true }, function (err) {
   memdb._get('key', { asBuffer: false }, function (err, value) {
-        value
         console.log(value)
         // eyJlbmMiOiJBMjU2R0NNIiwiYWxnIjoiZGlyIiwia2lkIjoialpESEVqN0ZhR3N5OHNUSUZLRWlnejB4TjFEVWlBZWp0S1ZNcEl2Z3dqOCJ9..LLeRPtRCpn-Zie6-.zZc0LQ_vvHCppRAaC5fxw4yJ0041l6mGOSgLDVnaPagSv_3Khp8a8lyAo9utHQKpVX6RNVaVPBQQxJpkw_Zyljeg7L-O_Nc3N2Hi_904qE6_zwORqQRc.R0JhfgTHIcD_93kXzZ8BrA
   })
