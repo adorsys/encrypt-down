@@ -71,3 +71,9 @@ Made with :heart: by [radzom](https://github.com/radzom) and all these wonderful
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind are welcome!
+
+## Big Thanks
+
+Cross-browser Testing Platform and Open Source ♥ Provided by [Sauce Labs](https://saucelabs.com).
+
+[![Sauce Labs logo](./Sauce-Labs.png)](https://saucelabs.com)
