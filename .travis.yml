@@ -1,16 +1,14 @@
 language: node_js
 node_js:
   - 8
-branches:
-  only:
-    - master
+env:
+  global:
+    - secure: >-
+        ugihoYWhuDR4n0tgCB/qhexFP/fd1TeTnVWYU2wTAT/kltsuw7xeMRTk2yggi3yW1HwAosatE7c0TAfT2kg1VbjNjKZ/MGrW/vY39EdHn361n6DcXEAVeq2jPIXdET3xfiAvOnFi4fF7IxUcCn6Y5jBvtWHruPa7z0ZER08LJM9Q3oiq/pD1Np1U8rGF8vBl2LUHS7Rv7f1uqT53Wo5dzF98DztoOb2zl2rBvqvGyiG8kFCwQq9WEqfn+A3vv16AYsiXxBUtnGIaYz8C3pB9EWCWtygM+eaUbCEqLnr9YSSH3gDClw1v9woMYkOKZZb2LsU9trzZrOLOzpIRv5bEzWGPLeNbR/2c7w+r6ulljVULzgz7NIIk3Bh0l9GqN+S4aZvWXzHIdH8MV2TGr+tjArOXu1YtXIImC/eHElyxJBCHwF+BpXqeraAiCiwD6GeK6d5/7CWjmD5m6w/xocpRQZmrl9XRFDCQs+2g0mkcgBDT4pWGWPNIbZe2eM/pE9LTyIVGi5WxqN/OVehnmmeM2ylGIRfI8v5UjCnk/6uwAjtFqOtAmT2B0+Yot1A8PtFLe001Y7m9tI/b286NOSb/s0ivxKt6RgvpR/LYCKW1CgI0pUbn8UM7ojPRCUU666TKsAV6o9TKFn6/FIu6RkkDAOMrFzlRgRXRPiz1ifABHTE=
+    - secure: >-
+        rYWHceSVNLf4JDC8hvNIMW0nNoAI6zZ4RNmQGMMnW5M4K9ILohiXw9yia+b8IqI6dGzptfNRUoXZw0njMTAIrwvY47SAjGN7xDcyt/KJiLDwfBxP0AJtP998t6Lw1s3wnL28heseXMkfPaDhSpkHAdsd2gZ/U7AJP7isggIZAeql8v5pJ6yI/WWoVcKHpXOUN686D4aXHowiIsXwCm1U7fqNfcucJgzTfMvijmY69FhwlPsDdAICFUPI6TFBTb7slwcrHT+P+ej6hLxsHdfh7TtQ4r2pjXIztwKcd9UePVKazz/vfNTN2LFd/RBuS9eTB0HTiOgaAHRBIP3+AiNQIb3nAy2gQXCsXk16YCdfMmWYl2rmLe+XDIJpymn4Bjf3CRWCocvOckPum0J5xv4JANblQMC+EgiQhRK6Ah/BRwiswtGdFFK/3D9X1lLdJXIC7x+/1+dr9m82xha4SZFFwj5iqEnML5z0jyetkSGo0imsQlPc19B8+t/zbJ382YbrI/6aeWO1YynTbuEI5FFO6vajfCd/aGfAbSoZVEeG7n3m8SIo/vh+8MxSuLHGgiRtO8BiAfoi8k2SRHi/ACN4lSFE6YbRR0BhA3UtMFhAWdKizln9D7bAuSgxF7mgekKXLdHp5B8nqiiBBsFGIzjyCnOFxlto148ZGnXX6pQ16HE=
 notifications:
   email: false
 script:
   - npm run build
-  - npm run test
-  - npm run test:integ
-after_success:
-  - npm run coverage
-  - npx semantic-release
-
+  - 'npm run test:ci'
