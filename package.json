@@ -34,7 +34,7 @@
     "lint": "standard --verbose | snazzy",
     "format": "prettier-standard '**/*.js'",
     "test": "nyc --reporter=lcov --reporter=text ava",
-    "test:integ-browser": "airtap --loopback airtap.local test/integrations/leveljs.test.js",
+    "test:integ-browser": "airtap test/integrations/leveljs.test.js",
     "test:integ-browser-local": "airtap --coverage --local --port 9000 test/integrations/leveljs.test.js",
     "test:integ-node": "tape test/integrations/leveldown.test.js test/integrations/memdown.test.js | tap-spec",
     "test:ci": "npm run test && npm run test:integ-node && npm run test:integ-browser",
