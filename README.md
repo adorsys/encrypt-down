@@ -70,7 +70,7 @@ Made with :heart: by [radzom](https://github.com/radzom) and all these wonderful
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| <img src="https://avatars.githubusercontent.com/u/3055345" width="100px;"/><br /><sub><b>Vincent Weevers</b></sub><br />:question: | <img src="https://avatars.githubusercontent.com/u/1225651" width="100px;"/><br /><sub><b>Francis Pouatcha</b></sub><br />:ideas: | <img src="https://avatars2.githubusercontent.com/u/25199775" width="100px;"/><br /><sub><b>Boris Skert</b></sub><br />:doc: | | | | |
+| <img src="https://avatars.githubusercontent.com/u/3055345" width="100px;"/><br /><sub><b>Vincent Weevers</b></sub><br />💬 | <img src="https://avatars.githubusercontent.com/u/1225651" width="100px;"/><br /><sub><b>Francis Pouatcha</b></sub><br />🤔 | <img src="https://avatars2.githubusercontent.com/u/25199775" width="100px;"/><br /><sub><b>Boris Skert</b></sub><br />📖 | | | | |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
