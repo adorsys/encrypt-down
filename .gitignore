@@ -76,3 +76,6 @@ typings/
 
 # Serverless directories
 .serverless
+
+# Ignore IDEA
+.idea/
