@@ -1,3 +1,5 @@
+.idea/
+
 # dist
 dist
 
@@ -74,3 +76,6 @@ typings/
 
 # Serverless directories
 .serverless
+
+# Ignore IDEA
+.idea/

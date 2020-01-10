@@ -47,6 +47,8 @@ test.cb('unsorted entry, sorted iterator', t => {
     await promisedDB.put('a', 'A')
     await promisedDB.put('c', 'C')
     await promisedDB.put('e', 'E')
+    await promisedDB.put('ß', 'ß')
+    await promisedDB.put('😀', '🎉')
     await promisedDB.batch([
       { type: 'put', key: 'd', value: 'D' },
       { type: 'put', key: 'b', value: 'B' },
@@ -58,13 +60,15 @@ test.cb('unsorted entry, sorted iterator', t => {
       promisedDB.db.iterator({ keyAsBuffer: false, valueAsBuffer: false }),
       function (err, data) {
         t.falsy(err, 'no error')
-        t.is(data.length, 5, 'correct number of entries')
+        t.is(data.length, 7, 'correct number of entries')
         const expected = [
           { key: 'a', value: 'A' },
           { key: 'c', value: 'C' },
           { key: 'd', value: 'D' },
           { key: 'f', value: 'F' },
-          { key: 'g', value: 'G' }
+          { key: 'g', value: 'G' },
+          { key: 'ß', value: 'ß' },
+          { key: '😀', value: '🎉' }
         ]
         t.deepEqual(data, expected)
         t.end()

@@ -62,7 +62,7 @@ DB.prototype._put = function (key, value, options, callback) {
 }
 
 DB.prototype._get = function (key, options, callback) {
-  this.db.get(key, { ...options, asBuffer: false }, (err, cipher) => {
+  this.db.get(key, Object.assign({}, options, { asBuffer: false }), (err, cipher) => {
     if (err) {
       return callback(err)
     }
@@ -70,10 +70,7 @@ DB.prototype._get = function (key, options, callback) {
       .decrypt(cipher)
       .then(function (value) {
         const checkedValue = emptyStringWhenNull(value)
-        callback(
-          null,
-          options.asBuffer ? Buffer.from(String(checkedValue)) : checkedValue
-        )
+        callback(null, options.asBuffer ? Buffer.from(String(checkedValue)) : checkedValue)
       })
       .catch(callback)
   })
@@ -108,7 +105,7 @@ function Iterator (db, options) {
   this.keys = options.keys
   this.values = options.values
   this.options = options
-  this.it = db.db.iterator({ ...this.options, valueAsBuffer: false })
+  this.it = db.db.iterator(Object.assign({}, this.options, { valueAsBuffer: false }))
 }
 
 inherits(Iterator, AbstractIterator)
@@ -124,11 +121,7 @@ Iterator.prototype._next = function (callback) {
     this.codec
       .decrypt(cipher)
       .then(value => {
-        callback(
-          null,
-          key,
-          this.options.valueAsBuffer ? Buffer.from(String(value)) : value
-        )
+        callback(null, key, this.options.valueAsBuffer ? Buffer.from(String(value)) : value)
       })
       .catch(callback)
   })
@@ -144,6 +137,6 @@ function emptyStringWhenNull (value) {
 
 function encryptOperationValue (codec, operation) {
   return codec.encrypt(operation.value).then(function (cipher) {
-    return { ...operation, value: cipher }
+    return Object.assign({}, operation, { value: cipher })
   })
 }
