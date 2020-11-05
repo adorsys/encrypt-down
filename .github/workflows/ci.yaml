@@ -24,7 +24,7 @@ jobs:
 
       - name: test
         run: npm run test:ci
-        with:
+        env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
 
