@@ -22,6 +22,12 @@ jobs:
       - name: build
         run: npm run build
 
+      - uses: saucelabs/sauce-connect-action@master
+        with:
+          username: ${{ secrets.SAUCE_USERNAME }}
+          accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
+          tunnelIdentifier: github-action-tunnel
+
       - name: test
         run: npm run test:ci
         env:
