@@ -32,7 +32,7 @@ test.cb('not specifying a jwk raises an error', t => {
   ;(async () => {
     t.throws(
       () => EncryptDown(memdown(), {}),
-      'EncryptDown: a JsonWebKey is required!',
+      { message: 'EncryptDown: a JsonWebKey is required!' },
       'correct Error is thrown'
     )
     t.end()
@@ -56,24 +56,24 @@ test.cb('unsorted entry, sorted iterator', t => {
       { type: 'del', key: 'b' },
       { type: 'del', key: 'e' }
     ])
-    concat(
-      promisedDB.db.iterator({ keyAsBuffer: false, valueAsBuffer: false }),
-      function (err, data) {
-        t.falsy(err, 'no error')
-        t.is(data.length, 7, 'correct number of entries')
-        const expected = [
-          { key: 'a', value: 'A' },
-          { key: 'c', value: 'C' },
-          { key: 'd', value: 'D' },
-          { key: 'f', value: 'F' },
-          { key: 'g', value: 'G' },
-          { key: 'ß', value: 'ß' },
-          { key: '😀', value: '🎉' }
-        ]
-        t.deepEqual(data, expected)
-        t.end()
-      }
-    )
+    concat(promisedDB.db.iterator({ keyAsBuffer: false, valueAsBuffer: false }), function (
+      err,
+      data
+    ) {
+      t.falsy(err, 'no error')
+      t.is(data.length, 7, 'correct number of entries')
+      const expected = [
+        { key: 'a', value: 'A' },
+        { key: 'c', value: 'C' },
+        { key: 'd', value: 'D' },
+        { key: 'f', value: 'F' },
+        { key: 'g', value: 'G' },
+        { key: 'ß', value: 'ß' },
+        { key: '😀', value: '🎉' }
+      ]
+      t.deepEqual(data, expected)
+      t.end()
+    })
   })()
 })
 
@@ -247,10 +247,7 @@ test.cb('backing rbtree is buffer-aware', t => {
     const one = Buffer.from('80', 'hex')
     const two = Buffer.from('c0', 'hex')
 
-    t.true(
-      two.toString() === one.toString(),
-      'would be equal when not buffer-aware'
-    )
+    t.true(two.toString() === one.toString(), 'would be equal when not buffer-aware')
     t.true(ltgt.compare(two, one) > 0, 'but greater when buffer-aware')
 
     await promisedDB.put(one, 'one')
@@ -340,56 +337,6 @@ test.cb('put multiple times', t => {
     promisedDB.get('key', { asBuffer: false }).then(value => {
       t.is(value, 'val2')
       t.end()
-    })
-  })()
-})
-
-test.cb('number keys', t => {
-  ;(async () => {
-    const numbers = [2, 12]
-    const buffers = numbers.map(stringBuffer)
-
-    const promisedDB = t.context.promisedDB
-    await promisedDB.open()
-    await promisedDB.batch(numbers.map(putKey))
-
-    const iterator1 = promisedDB.db.iterator({ keyAsBuffer: false })
-    const iterator2 = promisedDB.db.iterator({ keyAsBuffer: true })
-
-    concat(iterator1, function (err, entries) {
-      t.falsy(err, 'no iterator error')
-      t.deepEqual(entries.map(getKey), numbers, 'sorts naturally')
-
-      concat(iterator2, function (err, entries) {
-        t.falsy(err, 'no iterator error')
-        t.deepEqual(entries.map(getKey), buffers, 'buffer input is stringified')
-        t.end()
-      })
-    })
-  })()
-})
-
-test.cb('date keys', t => {
-  ;(async () => {
-    const dates = [new Date(0), new Date(1)]
-    const buffers = dates.map(stringBuffer)
-
-    const promisedDB = t.context.promisedDB
-    await promisedDB.open()
-    await promisedDB.batch(dates.map(putKey))
-
-    const iterator = promisedDB.db.iterator({ keyAsBuffer: false })
-    const iterator2 = promisedDB.db.iterator({ keyAsBuffer: true })
-
-    concat(iterator, function (err, entries) {
-      t.falsy(err, 'no iterator error')
-      t.deepEqual(entries.map(getKey), dates, 'sorts naturally')
-
-      concat(iterator2, function (err, entries) {
-        t.falsy(err, 'no iterator error')
-        t.deepEqual(entries.map(getKey), buffers, 'buffer input is stringified')
-        t.end()
-      })
     })
   })()
 })
