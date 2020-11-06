@@ -9,6 +9,5 @@ suite({
   test: test,
   factory: function () {
     return new EncryptDown(leveldown(tempy.directory()), { jwk })
-  },
-  seek: false
+  }
 })
