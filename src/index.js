@@ -11,6 +11,7 @@ const jwe = require('@adorsys/jwe-codec')
 const { JWK } = require('node-jose')
 
 const EncodingError = require('level-errors').EncodingError
+const rangeMethods = ['approximateSize', 'compactRange']
 
 module.exports = DB.default = DB
 
@@ -19,6 +20,16 @@ function DB (db, opts) {
 
   const manifest = db.supports || {}
   AbstractLevelDOWN.call(this, manifest)
+
+  this.supports.encodings = true
+  this.supports.additionalMethods = {}
+
+  rangeMethods.forEach(function (m) {
+    // TODO (future major): remove this fallback
+    if (typeof db[m] === 'function' && !this.supports.additionalMethods[m]) {
+      this.supports.additionalMethods[m] = true
+    }
+  }, this)
 
   opts = opts || {}
   if (typeof opts.jwk === 'undefined') {
@@ -83,10 +94,6 @@ DB.prototype._del = function (key, opts, cb) {
   this.db.del(key, opts, cb)
 }
 
-DB.prototype._chainedBatch = function () {
-  return new Batch(this)
-}
-
 DB.prototype._batch = function (ops, opts, cb) {
   Promise.all(
     ops.map(op => {
@@ -125,6 +132,7 @@ Iterator.prototype._next = function (cb) {
     if (key === undefined && cipher === undefined) {
       return cb()
     }
+
     this.codec
       .decrypt(cipher)
       .then(value => {
@@ -140,34 +148,6 @@ Iterator.prototype._seek = function (key) {
 
 Iterator.prototype._end = function (cb) {
   this.it.end(cb)
-}
-
-function Batch (db, codec) {
-  AbstractChainedBatch.call(this, db)
-  this.codec = db.codec
-  this.batch = db.db.batch()
-}
-
-inherits(Batch, AbstractChainedBatch)
-
-Batch.prototype._put = function (key, value) {
-  return this.codec
-    .encrypt(value)
-    .then(cipher => {
-      this.batch.put(key, cipher)
-    })
-}
-
-Batch.prototype._del = function (key) {
-  this.batch.del(key)
-}
-
-Batch.prototype._clear = function () {
-  this.batch.clear()
-}
-
-Batch.prototype._write = function (opts, cb) {
-  this.batch.write(opts, cb)
 }
 
 function encryptOperationValue (codec, operation) {
