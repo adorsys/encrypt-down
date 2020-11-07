@@ -2,7 +2,7 @@
   "name": "@adorsys/encrypt-down",
   "version": "0.0.0-development",
   "description": "Encryption layer for level-db",
-  "main": "src/index.js",
+  "main": "index.js",
   "browser": {
     "src/index.js": "dist/lib.js"
   },
@@ -35,7 +35,7 @@
     "format": "prettier-standard '**/*.js'",
     "test": "nyc --reporter=lcov --reporter=text ava",
     "test:integ-browser": "airtap --loopback airtap.local test/integrations/leveljs.test.js",
-    "test:integ-browser-local": "airtap -p local --coverage test/integrations/leveljs.test.js",
+    "test:integ-browser-local": "airtap --coverage --local --port 9000 test/integrations/leveljs.test.js",
     "test:integ-node": "tape test/integrations/leveldown.test.js test/integrations/memdown.test.js | tap-spec",
     "test:ci": "npm run test && npm run test:integ-node && npm run test:integ-browser",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
@@ -73,8 +73,7 @@
     "@types/abstract-leveldown": "^5.0.1",
     "@types/memdown": "^3.0.0",
     "@types/node-jose": "^1.1.5",
-    "airtap": "^4.0.1",
-    "airtap-sauce": "^1.1.0",
+    "airtap": "^3.0.0",
     "ava": "^3.13.0",
     "browserify": "16.5.1",
     "coveralls": "^3.1.0",
