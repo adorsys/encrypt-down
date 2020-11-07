@@ -17,6 +17,12 @@
     "database"
   ],
   "author": "Gunnar Radzom <github@radzom.net> (http://adorsys.de/)",
+  "contributors": [
+    {
+      "name": "Jan-Otto Kröpke",
+      "email": "github@jkroepke.de"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/adorsys/encrypt-down/issues"
