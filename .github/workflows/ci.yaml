@@ -3,7 +3,7 @@ name: CI
 
 # https://github.com/airtap/airtap/blob/65c20af3a5174d1ddc3eaa93df3366f3ee5a37e3/lib/sauce-browser.js#L69
 env:
-  TRAVIS_JOB_NUMBER: github-actions
+  TRAVIS_JOB_NUMBER: github-actions-${{ env.GITHUB_RUN_ID }}
 
 on:
   pull_request:
