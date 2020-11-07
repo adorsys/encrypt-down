@@ -1,4 +1,7 @@
 # :closed_lock_with_key: encrypt-down :closed_lock_with_key:
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![leveldb](https://leveljs.org/img/badge.svg)](https://github.com/level/awesome)
 [![Travis](https://img.shields.io/travis/adorsys/encrypt-down.svg)](https://travis-ci.org/adorsys/encrypt-down)
@@ -69,9 +72,20 @@ db.put('key', { awesome: true }, function (err) {
 Made with :heart: by [radzom](https://github.com/radzom) and all these wonderful contributors ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-| <img src="https://avatars.githubusercontent.com/u/3055345" width="100px;"/><br /><sub><b>Vincent Weevers</b></sub><br />💬 | <img src="https://avatars.githubusercontent.com/u/1225651" width="100px;"/><br /><sub><b>Francis Pouatcha</b></sub><br />🤔 | <img src="https://avatars2.githubusercontent.com/u/25199775" width="100px;"/><br /><sub><b>Boris Skert</b></sub><br />📖 | | | | |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://vincentweevers.nl/"><img src="https://avatars2.githubusercontent.com/u/3055345?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Vincent Weevers</b></sub></a><br /><a href="#question-vweevers" title="Answering Questions">💬</a></td>
+    <td align="center"><a href="https://github.com/francis-pouatcha"><img src="https://avatars1.githubusercontent.com/u/1225651?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Francis Pouatcha</b></sub></a><br /><a href="#ideas-francis-pouatcha" title="Ideas, Planning, & Feedback">🤔</a></td>
+    <td align="center"><a href="https://github.com/borisskert"><img src="https://avatars1.githubusercontent.com/u/25199775?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Boris Skert</b></sub></a><br /><a href="https://github.com/adorsys/encrypt-down/commits?author=borisskert" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/jkroepke"><img src="https://avatars3.githubusercontent.com/u/1560587?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jan-Otto Kröpke</b></sub></a><br /><a href="#maintenance-jkroepke" title="Maintenance">🚧</a> <a href="#infra-jkroepke" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind are welcome!
@@ -81,3 +95,16 @@ This project follows the [all-contributors](https://github.com/kentcdodds/all-co
 Cross-browser Testing Platform and Open Source ♥ Provided by [Sauce Labs](https://saucelabs.com).
 
 [![Sauce Labs logo](./Sauce-Labs.png)](https://saucelabs.com)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

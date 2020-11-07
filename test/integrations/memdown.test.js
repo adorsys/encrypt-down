@@ -9,7 +9,11 @@ suite({
   factory: function () {
     return new EncryptDown(memdown(), { jwk })
   },
-  seek: false,
+
+  // Opt-in to new clear() tests
+  clear: true,
+
+  // Opt-out of unsupported features
   createIfMissing: false,
   errorIfExists: false
 })

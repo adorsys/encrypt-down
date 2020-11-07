@@ -1,3 +1,7 @@
+providers:
+  - airtap-sauce
+  - airtap-default
+
 browsers:
   - name: chrome
     version: latest
@@ -9,3 +13,8 @@ browsers:
     version: latest
   - name: android
     version: '6.0'
+
+presets:
+  local:
+    browsers:
+      - name: default
