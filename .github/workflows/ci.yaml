@@ -41,7 +41,7 @@ jobs:
       - name: integration test (node)
         run: npm run test:integ-node
 
-      - name: integration test (browser)
+      - name: integration test (sauce)
         run: npm run test:integ-browser
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
@@ -52,22 +52,22 @@ jobs:
         env:
           COVERALLS_REPO_TOKEN: "${{ secrets.COVERALLS_REPO_TOKEN }}"
           COVERALLS_GIT_BRANCH: "${{ github.ref }}"
-  deploy:
-    runs-on: ubuntu-latest
-    needs: [tests]
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12'
-
-      - name: Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
+#  deploy:
+#    runs-on: ubuntu-latest
+#    needs: [tests]
+#    if: github.ref == 'refs/heads/master'
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          fetch-depth: 0
+#          persist-credentials: false
+#
+#      - uses: actions/setup-node@v1
+#        with:
+#          node-version: '12'
+#
+#      - name: Release
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#        run: npx semantic-release
