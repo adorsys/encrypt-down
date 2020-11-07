@@ -6,6 +6,6 @@ browsers:
   - name: safari
     version: latest
   - name: microsoftedge
-    version: latest
+    version: '18'
   - name: android
     version: '6.0'
