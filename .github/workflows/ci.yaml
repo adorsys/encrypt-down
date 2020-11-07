@@ -1,6 +1,10 @@
 ---
 name: CI
 
+# https://github.com/airtap/airtap/blob/65c20af3a5174d1ddc3eaa93df3366f3ee5a37e3/lib/sauce-browser.js#L69
+env:
+  TRAVIS_JOB_NUMBER: github-actions-${{ github.run_id }}
+
 on:
   pull_request:
   push:
@@ -42,15 +46,15 @@ jobs:
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          tunnelIdentifier: github-actions-${{ env.GITHUB_RUN_ID }}
+          tunnelIdentifier: ${{ env.TRAVIS_JOB_NUMBER }}
 
       - name: integration test (sauce)
+        # if: false # https://github.com/airtap/airtap/issues/297
         run: npm run test:integ-browser
         env:
           SAUCE_USERNAME: ${{ secrets.SAUCE_USERNAME }}
           SAUCE_ACCESS_KEY: ${{ secrets.SAUCE_ACCESS_KEY }}
-          # https://github.com/airtap/airtap/blob/65c20af3a5174d1ddc3eaa93df3366f3ee5a37e3/lib/sauce-browser.js#L69
-          TRAVIS_JOB_NUMBER: github-actions-${{ env.GITHUB_RUN_ID }}
+          TRAVIS_JOB_NUMBER: ${{ env.TRAVIS_JOB_NUMBER }}
 
       - name: coverage
         run: npm run coverage
