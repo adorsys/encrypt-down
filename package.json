@@ -50,8 +50,7 @@
   },
   "lint-staged": {
     "{src,test}/**/*.js": [
-      "prettier-standard",
-      "git add"
+      "prettier-standard"
     ]
   },
   "ava": {
@@ -71,11 +70,13 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@octokit/core": "^3.2.1",
+    "@types/abstract-leveldown": "^5.0.1",
+    "@types/memdown": "^3.0.0",
     "@types/node-jose": "^1.1.5",
     "airtap": "^4.0.1",
     "airtap-sauce": "^1.1.0",
     "ava": "^3.13.0",
-    "browserify": "<16.5.2",
+    "browserify": "16.5.1",
     "coveralls": "^3.1.0",
     "cuid": "^2.1.8",
     "eslint-plugin-html": "^6.1.0",

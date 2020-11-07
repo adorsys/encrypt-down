@@ -3,7 +3,6 @@
 // based on https://github.com/Level/encoding-down/blob/master/index.js
 
 const AbstractLevelDOWN = require('abstract-leveldown').AbstractLevelDOWN
-const AbstractChainedBatch = require('abstract-leveldown').AbstractChainedBatch
 const AbstractIterator = require('abstract-leveldown').AbstractIterator
 const inherits = require('inherits')
 const jwe = require('@adorsys/jwe-codec')
@@ -43,8 +42,7 @@ function DB (db, opts) {
 inherits(DB, AbstractLevelDOWN)
 DB.prototype.type = 'encrypt-down'
 
-DB.prototype._serializeKey =
-DB.prototype._serializeValue = function (value) {
+DB.prototype._serializeKey = DB.prototype._serializeValue = function (value) {
   return value
 }
 

@@ -1,0 +1,52 @@
+{
+  "projectName": "encrypt-down",
+  "projectOwner": "adorsys",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "none",
+  "contributors": [
+    {
+      "login": "vweevers",
+      "name": "Vincent Weevers",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/3055345?v=4",
+      "profile": "https://vincentweevers.nl/",
+      "contributions": [
+        "question"
+      ]
+    },
+    {
+      "login": "francis-pouatcha",
+      "name": "Francis Pouatcha",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1225651?v=4",
+      "profile": "https://github.com/francis-pouatcha",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "borisskert",
+      "name": "Boris Skert",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/25199775?v=4",
+      "profile": "https://github.com/borisskert",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "jkroepke",
+      "name": "Jan-Otto Kröpke",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1560587?v=4",
+      "profile": "https://github.com/jkroepke",
+      "contributions": [
+        "maintenance",
+        "infra"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

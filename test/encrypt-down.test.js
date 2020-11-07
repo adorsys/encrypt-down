@@ -3,7 +3,7 @@ const memdown = require('memdown')
 const concat = require('level-concat-iterator')
 const ltgt = require('ltgt')
 const EncryptDown = require('../src')
-const { stringBuffer, getKey, putKey, promisify } = require('./helper')
+const { promisify } = require('./helper')
 const jwk = require('./jwk.json')
 
 test.beforeEach(async t => {
