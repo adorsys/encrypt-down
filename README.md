@@ -57,7 +57,7 @@ db.put('key', { awesome: true }, function (err) {
 
 ### Browser Support
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/radzom.svg)](https://saucelabs.com/u/radzom)
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/adorsysbot.svg)](https://saucelabs.com/u/adorsysbot)
 
 ## API
 
