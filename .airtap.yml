@@ -1,3 +1,7 @@
+providers:
+  - airtap-sauce
+  - airtap-default
+
 browsers:
   - name: chrome
     version: latest
@@ -7,5 +11,17 @@ browsers:
     version: latest
   - name: microsoftedge
     version: '18'
-  - name: android
+  - name: and_chr
     version: '6.0'
+
+presets:
+  local:
+    browsers:
+      - name: default
+  chrome:
+    providers:
+      - airtap-system
+    browsers:
+      - name: chrome
+        options:
+          headless: true
