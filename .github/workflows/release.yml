@@ -1,15 +1,12 @@
 ---
 name: CI
 
-env:
-  NPM_CONFIG_REGISTRY: https://registry.npmjs.org:8443/
-
 on:
   repository_dispatch:
-    types: [semantic-release]
+    types: [release]
 
 jobs:
-  deploy:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
