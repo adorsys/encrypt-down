@@ -97,7 +97,7 @@
     "memdown": "^5.1.0",
     "nyc": "^15.1.0",
     "prettier-standard": "^16.4.1",
-    "semantic-release": "^17.2.2",
+    "semantic-release": "^19.0.3",
     "snazzy": "^9.0.0",
     "standard": "^16.0.1",
     "tap-spec": "^5.0.0",
